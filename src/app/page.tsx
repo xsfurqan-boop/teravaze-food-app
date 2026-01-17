@@ -9,7 +9,7 @@ export default function Home() {
   const categories = MOCK_MENU.restaurant.categories;
 
   return (
-    <main className="min-h-screen bg-[#fdfbf7]"> {/* Light cream background like FoodsInn */}
+    <main className="min-h-screen bg-neutral-950 text-white selection:bg-orange-500/30">
       <Navbar />
       <HeroCarousel />
       <CategoryNav />
@@ -22,10 +22,10 @@ export default function Home() {
           if (categoryItems.length === 0) return null;
 
           return (
-            <section key={category} id={category} className="pt-8 scroll-mt-28">
+            <section key={category} id={category} className="pt-8 scroll-mt-32">
               <SectionHeader title={category} />
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {categoryItems.map((item) => (
                   <MenuItem key={item.id} item={item} />
                 ))}
