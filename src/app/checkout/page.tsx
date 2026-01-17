@@ -28,7 +28,7 @@ export default function CheckoutPage() {
     const [success, setSuccess] = useState(false)
     const [paymentMethod, setPaymentMethod] = useState<'card' | 'cash' | 'paypal'>('card')
 
-    const DELIVERY_FEE = 5.00
+    const DELIVERY_FEE = 0
     const DISCOUNT = 5.00
     const FINAL_TOTAL = (cartTotal + DELIVERY_FEE) - (useCoins ? DISCOUNT : 0)
 
@@ -165,7 +165,7 @@ export default function CheckoutPage() {
                         </div>
                         <div className="flex justify-between text-sm">
                             <span className="text-muted-foreground">Delivery Fee</span>
-                            <span>{DELIVERY_FEE.toFixed(2)} AZN</span>
+                            <span className="text-green-500 font-bold">Free</span>
                         </div>
                         {useCoins && (
                             <div className="flex justify-between text-sm text-green-600 font-medium">
