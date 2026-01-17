@@ -1,7 +1,5 @@
 import type { NextConfig } from "next";
 
-// Build Cache Buster: v1.1
-
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
