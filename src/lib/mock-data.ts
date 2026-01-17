@@ -135,7 +135,7 @@ export const MOCK_MENU = {
             description: "Barbecued Quarter chicken, marinated in a creamy based marination.",
             price: 4.80, // 745 PKR
             currency: "AZN",
-            image: "https://images.unsplash.com/photo-1626776420079-fa1878dd1700?auto=format&fit=crop&q=80&w=500", // Creamy Tikka Skewers (Changed)
+            image: "https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&q=80&w=500", // Grilled Skewers (New)
             category: "BBQ",
             popular: false,
         }
