@@ -15,6 +15,7 @@ type CartContextType = {
     items: CartItem[];
     addToCart: (item: Omit<CartItem, 'quantity'>) => void;
     removeFromCart: (id: string) => void;
+    decreaseQuantity: (id: string) => void;
     clearCart: () => void;
     cartCount: number;
     cartTotal: number;
@@ -61,6 +62,19 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         setItems((prev) => prev.filter((i) => i.id !== id));
     };
 
+    const decreaseQuantity = (id: string) => {
+        setItems((prev) => {
+            const existing = prev.find((i) => i.id === id);
+            if (existing && existing.quantity > 1) {
+                return prev.map((i) =>
+                    i.id === id ? { ...i, quantity: i.quantity - 1 } : i
+                );
+            }
+            // If quantity is 1, remove it
+            return prev.filter((i) => i.id !== id);
+        });
+    };
+
     const clearCart = () => setItems([]);
 
     const toggleMenu = () => setIsMenuOpen(prev => !prev);
@@ -74,6 +88,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
             items,
             addToCart,
             removeFromCart,
+            decreaseQuantity,
             clearCart,
             cartCount,
             cartTotal,

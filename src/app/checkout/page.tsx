@@ -22,7 +22,7 @@ const initialOptions = {
 
 export default function CheckoutPage() {
     const router = useRouter()
-    const { items, cartTotal, removeFromCart, clearCart } = useCart()
+    const { items, cartTotal, removeFromCart, clearCart, addToCart, decreaseQuantity } = useCart()
     const [useCoins, setUseCoins] = useState(false)
     const [loading, setLoading] = useState(false)
     const [success, setSuccess] = useState(false)
@@ -134,23 +134,27 @@ export default function CheckoutPage() {
                                         </div>
                                         <div>
                                             <p className="font-bold text-sm line-clamp-1">{item.name}</p>
-                                            <p className="text-xs font-bold mt-1 text-orange-600">
-                                                {item.quantity} x {item.price} {item.currency}
-                                            </p>
+                                            <div className="flex items-center gap-3 mt-2">
+                                                <button
+                                                    onClick={() => decreaseQuantity(item.id)}
+                                                    className="w-6 h-6 flex items-center justify-center bg-neutral-800 rounded-full text-white hover:bg-neutral-700"
+                                                >
+                                                    -
+                                                </button>
+                                                <span className="text-sm font-bold w-4 text-center">{item.quantity}</span>
+                                                <button
+                                                    onClick={() => addToCart(item)}
+                                                    className="w-6 h-6 flex items-center justify-center bg-orange-600 rounded-full text-white hover:bg-orange-700"
+                                                >
+                                                    +
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="flex flex-col items-end gap-2">
                                         <p className="font-bold text-sm">
                                             {(item.price * item.quantity).toFixed(2)} {item.currency}
                                         </p>
-                                        <Button
-                                            variant="ghost"
-                                            size="icon"
-                                            className="h-6 w-6 text-red-500 hover:bg-red-50 hover:text-red-600"
-                                            onClick={() => removeFromCart(item.id)}
-                                        >
-                                            <Trash2 className="h-4 w-4" />
-                                        </Button>
                                     </div>
                                 </div>
                             ))}
@@ -177,6 +181,13 @@ export default function CheckoutPage() {
                             <span>Total</span>
                             <span className="text-primary">{FINAL_TOTAL.toFixed(2)} AZN</span>
                         </div>
+
+                        {/* Currency Warning for PayPal */}
+                        {paymentMethod === 'paypal' && (
+                            <div className="bg-blue-500/10 p-3 rounded-lg mt-4 text-xs text-blue-200 border border-blue-500/20">
+                                ℹ️ <b>Note:</b> PayPal does not support AZN. You will be charged equal value in <b>USD</b> (~${(FINAL_TOTAL * 0.59).toFixed(2)}).
+                            </div>
+                        )}
                     </div>
 
                     {/* Loyalty Application */}
