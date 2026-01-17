@@ -15,13 +15,19 @@ export default function HeroCarousel() {
         return item ? { image: item.image, title: item.name, category: cat } : null;
     }).filter(item => item !== null) as { image: string, title: string, category: string }[];
 
-    const prev = () => setCurrent((curr) => (curr === 0 ? slides.length - 1 : curr - 1));
-    const next = () => setCurrent((curr) => (curr === slides.length - 1 ? 0 : curr + 1));
+    const prev = () => {
+        setCurrent((curr) => (curr === 0 ? slides.length - 1 : curr - 1));
+    };
 
+    const next = () => {
+        setCurrent((curr) => (curr === slides.length - 1 ? 0 : curr + 1));
+    };
+
+    // Auto-slide effect that resets when current changes (manually or automatically)
     useEffect(() => {
-        const timer = setInterval(next, 5000); // Auto-slide every 5s
+        const timer = setInterval(next, 5000);
         return () => clearInterval(timer);
-    }, []);
+    }, [current]); // Dependency on current ensures timer resets on manual navigation
 
     if (slides.length === 0) return null;
 
@@ -57,16 +63,18 @@ export default function HeroCarousel() {
                 ))}
             </div>
 
-            {/* Arrows */}
+            {/* Arrows - Always Visible and Clickable */}
             <button
                 onClick={prev}
-                className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/30 backdrop-blur text-white hover:bg-orange-500 hover:text-white transition-all transform hover:scale-110 opacity-0 group-hover:opacity-100 z-20"
+                className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/40 backdrop-blur text-white hover:bg-orange-500 hover:text-white transition-all transform hover:scale-110 z-50 shadow-lg border border-white/10 cursor-pointer active:scale-95"
+                aria-label="Previous Slide"
             >
                 <ChevronLeft size={32} />
             </button>
             <button
                 onClick={next}
-                className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/30 backdrop-blur text-white hover:bg-orange-500 hover:text-white transition-all transform hover:scale-110 opacity-0 group-hover:opacity-100 z-20"
+                className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/40 backdrop-blur text-white hover:bg-orange-500 hover:text-white transition-all transform hover:scale-110 z-50 shadow-lg border border-white/10 cursor-pointer active:scale-95"
+                aria-label="Next Slide"
             >
                 <ChevronRight size={32} />
             </button>
@@ -79,6 +87,7 @@ export default function HeroCarousel() {
                         onClick={() => setCurrent(i)}
                         className={`h-2 rounded-full transition-all duration-300 ${current === i ? 'w-8 bg-orange-500' : 'w-2 bg-white/50 hover:bg-white'
                             }`}
+                        aria-label={`Go to slide ${i + 1}`}
                     />
                 ))}
             </div>
