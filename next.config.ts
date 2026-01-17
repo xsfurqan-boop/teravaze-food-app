@@ -7,7 +7,20 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "images.unsplash.com",
       },
+      {
+        protocol: "https",
+        hostname: "assets.indolj.io", // Allow FoodsInn images
+      },
     ],
+  },
+  async redirects() {
+    return [
+      {
+        source: '/restaurant/:id',
+        destination: '/',
+        permanent: true,
+      },
+    ]
   },
 };
 
