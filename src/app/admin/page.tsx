@@ -58,10 +58,21 @@ export default function AdminDashboard() {
         }
     }, [])
 
+    const updateStatus = async (orderId: string, newStatus: string) => {
+        const { error } = await supabase
+            .from('orders')
+            .update({ status: newStatus })
+            .eq('id', orderId)
+
+        if (!error) {
+            setOrders(prev => prev.map(o => o.id === orderId ? { ...o, status: newStatus } : o))
+        }
+    }
+
     // Statistics
     const totalRevenue = orders.reduce((sum, order) => sum + (order.total_amount || 0), 0)
     const activeOrders = orders.filter(o => o.status === 'pending' || o.status === 'preparing').length
-    const completedOrders = orders.filter(o => o.status === 'completed' || o.status === 'paid').length // Considering paid as completed for now
+    const completedOrders = orders.filter(o => o.status === 'completed' || o.status === 'paid').length
 
     return (
         <div className="p-8 space-y-8 min-h-screen bg-muted/20">
@@ -127,15 +138,25 @@ export default function AdminDashboard() {
                                                 ? order.items.map((i: any) => `${i.quantity}x ${i.name}`).join(", ")
                                                 : "Items info unavailable"}
                                         </p>
-                                        <p className="text-xs text-gray-400 mt-1">
-                                            {new Date(order.created_at).toLocaleString()}
-                                        </p>
+                                        <div className="flex gap-2 mt-1 text-xs text-muted-foreground">
+                                            <span>{new Date(order.created_at).toLocaleString()}</span>
+                                            <span>•</span>
+                                            <span>{order.total_amount?.toFixed(2)} AZN</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="flex items-center gap-4 ml-auto">
-                                    <div className="text-right">
-                                        <p className="font-bold text-lg">{order.total_amount?.toFixed(2)} AZN</p>
-                                    </div>
+                                <div className="flex items-center gap-3 ml-auto">
+                                    {order.status === 'pending' && (
+                                        <Button size="sm" onClick={() => updateStatus(order.id, 'preparing')}>
+                                            Accept Order
+                                        </Button>
+                                    )}
+                                    {order.status === 'preparing' && (
+                                        <Button size="sm" variant="secondary" onClick={() => updateStatus(order.id, 'completed')}>
+                                            Mark Ready
+                                        </Button>
+                                    )}
+
                                     <Badge
                                         variant={order.status === 'pending' ? 'destructive' : order.status === 'preparing' ? 'secondary' : 'default'}
                                         className="px-4 py-1 text-sm font-medium capitalize"
