@@ -49,6 +49,46 @@ export const MOCK_MENU = {
             image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=2000",
             category: "Sides",
             popular: false,
+        },
+        {
+            id: "105",
+            name: "Premium Mixed Grill",
+            description: "A deluxe assortment of our finest kebabs and grilled vegetables.",
+            price: 20,
+            currency: "AZN",
+            image: "/menu/item-1.png",
+            category: "Kebabs",
+            popular: true,
+        },
+        {
+            id: "106",
+            name: "Traditional Dolma",
+            description: "Grape leaves stuffed with seasoned minced lamb, rice, and herbs.",
+            price: 5,
+            currency: "AZN",
+            image: "/menu/item-2.png",
+            category: "Sides",
+            popular: true,
+        },
+        {
+            id: "107",
+            name: "Chef's Special Steak",
+            description: "Tender beef steak cooked to perfection with special house sauce.",
+            price: 20,
+            currency: "AZN",
+            image: "/menu/item-3.png",
+            category: "Kebabs",
+            popular: false,
+        },
+        {
+            id: "108",
+            name: "Cheese Lahmajun",
+            description: "Crispy thin dough topped with minced meat, vegetables, and melted cheese.",
+            price: 5,
+            currency: "AZN",
+            image: "/menu/item-4.png",
+            category: "Plov", // Categorizing as Plov for now or could create a new category if needed, using Plov to keep categories consistent
+            popular: false,
         }
     ]
 };
