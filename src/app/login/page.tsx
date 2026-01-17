@@ -51,8 +51,8 @@ export default function LoginPage() {
                     <Link href="/" className="inline-flex items-center text-muted-foreground hover:text-primary mb-6 transition-colors">
                         <ArrowLeft className="h-4 w-4 mr-2" /> Back to Home
                     </Link>
-                    <h1 className="text-4xl font-extrabold tracking-tight text-white">
-                        Welcome Back! <span className="text-primary">👋</span>
+                    <h1 className="text-3xl font-bold mb-2 flex items-center gap-2">
+                        Welcome <span className="text-4xl">👋</span>
                     </h1>
                     <p className="mt-2 text-muted-foreground">
                         Sign in to check your <span className="text-primary font-medium">Food Coins</span>.
