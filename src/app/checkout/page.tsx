@@ -49,7 +49,11 @@ export default function CheckoutPage() {
                 total_amount: FINAL_TOTAL,
                 status: details ? 'paid' : 'pending',
                 payment_method: paymentMethod == 'paypal' ? 'paypal' : paymentMethod,
-                items: items // Assuming Supabase 'orders' table has a JSONB 'items' column
+                items: items,
+                customer_name: user.user_metadata?.full_name || "Foodie User",
+                email: user.email,
+                address: "28 May Street, Baku, Azerbaijan",
+                phone: "+994 50 123 45 67"
             })
 
         if (error) {
