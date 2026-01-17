@@ -35,7 +35,7 @@ export const MOCK_MENU = {
             id: "203",
             name: "Crunchy Finger Fish",
             description: "5 Pcs of extra crispy boneless fish strips. Served with tartar sauce and fries.",
-            price: 8.50, // 1345 PKR
+            price: 1.00, // Updated to 1 AZN on user request
             currency: "AZN",
             image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&q=80&w=500", // Fried Chicken/Fish (Confirmed)
             category: "Appetizers",

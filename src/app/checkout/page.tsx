@@ -203,27 +203,24 @@ export default function CheckoutPage() {
                         <h2 className="font-semibold text-lg flex items-center gap-2">
                             <CreditCard className="h-5 w-5 text-primary" /> Payment Method
                         </h2>
-                        <div className="grid grid-cols-3 gap-3">
+                        <div className="grid grid-cols-2 gap-3">
                             <div
-                                onClick={() => setPaymentMethod('card')}
-                                className={`p-4 border rounded-xl flex flex-col items-center justify-center gap-2 cursor-pointer transition-colors ${paymentMethod === 'card' ? 'border-primary bg-primary/5 ring-1 ring-primary' : 'bg-card'}`}
+                                onClick={() => setPaymentMethod('paypal')}
+                                className={`p-4 border rounded-xl flex flex-col items-center justify-center gap-2 cursor-pointer transition-colors ${paymentMethod === 'paypal' ? 'border-primary bg-primary/5 ring-1 ring-primary' : 'bg-card'}`}
                             >
-                                <CreditCard className="h-6 w-6" />
-                                <span className="font-medium text-sm">Card</span>
+                                <div className="flex items-center gap-1">
+                                    <span className="text-xl font-bold italic text-[#003087]">Pay<span className="text-[#009cde]">Pal</span></span>
+                                    <span className="text-sm text-gray-400">/</span>
+                                    <CreditCard className="h-5 w-5" />
+                                </div>
+                                <span className="font-medium text-sm">Online Payment</span>
                             </div>
                             <div
                                 onClick={() => setPaymentMethod('cash')}
                                 className={`p-4 border rounded-xl flex flex-col items-center justify-center gap-2 cursor-pointer transition-colors ${paymentMethod === 'cash' ? 'border-primary bg-primary/5 ring-1 ring-primary' : 'bg-card'}`}
                             >
                                 <Wallet className="h-6 w-6" />
-                                <span className="font-medium text-sm">Cash</span>
-                            </div>
-                            <div
-                                onClick={() => setPaymentMethod('paypal')}
-                                className={`p-4 border rounded-xl flex flex-col items-center justify-center gap-2 cursor-pointer transition-colors ${paymentMethod === 'paypal' ? 'border-primary bg-primary/5 ring-1 ring-primary' : 'bg-card'}`}
-                            >
-                                <span className="text-xl font-bold italic text-[#003087]">Pay<span className="text-[#009cde]">Pal</span></span>
-                                <span className="font-medium text-sm">Online</span>
+                                <span className="font-medium text-sm">Cash on Delivery</span>
                             </div>
                         </div>
                     </div>
@@ -236,6 +233,9 @@ export default function CheckoutPage() {
                                 createOrder={(data, actions) => {
                                     return actions.order.create({
                                         intent: "CAPTURE",
+                                        application_context: {
+                                            shipping_preference: "NO_SHIPPING"
+                                        },
                                         purchase_units: [
                                             {
                                                 amount: {
