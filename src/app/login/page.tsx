@@ -54,6 +54,7 @@ export default function LoginPage() {
                     <h1 className="text-3xl font-bold mb-2 flex items-center gap-2">
                         Welcome <span className="text-4xl">👋</span>
                     </h1>
+                    <p className="text-xs text-muted-foreground/50 absolute top-2 right-2">v1.1</p>
                     <p className="mt-2 text-muted-foreground">
                         Sign in to check your <span className="text-primary font-medium">Food Coins</span>.
                     </p>
