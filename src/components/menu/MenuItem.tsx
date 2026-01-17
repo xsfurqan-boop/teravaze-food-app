@@ -1,6 +1,10 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image"
-import { Plus } from "lucide-react"
+import { Plus, Check } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useCart } from "@/context/CartContext"
 
 interface MenuItemProps {
     item: {
@@ -15,7 +19,23 @@ interface MenuItemProps {
 }
 
 export function MenuItem({ item }: MenuItemProps) {
+    const { addToCart } = useCart();
+    const [isAdded, setIsAdded] = useState(false);
     const originalPrice = (item.price * 1.2).toFixed(2);
+
+    const handleAdd = () => {
+        addToCart({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            currency: item.currency,
+            image: item.image
+        });
+
+        // Show feedback
+        setIsAdded(true);
+        setTimeout(() => setIsAdded(false), 2000);
+    };
 
     return (
         <div className="group flex flex-col bg-neutral-900/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/5 hover:border-orange-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-orange-900/20 h-full">
@@ -66,9 +86,18 @@ export function MenuItem({ item }: MenuItemProps) {
                     </div>
 
                     <Button
-                        className="rounded-xl bg-white text-black hover:bg-orange-500 hover:text-white px-5 h-10 font-bold shadow-lg transition-all active:scale-95"
+                        onClick={handleAdd}
+                        disabled={isAdded}
+                        className={`rounded-xl h-10 font-bold shadow-lg transition-all active:scale-95 px-5 ${isAdded
+                                ? 'bg-green-600 text-white hover:bg-green-700'
+                                : 'bg-white text-black hover:bg-orange-500 hover:text-white'
+                            }`}
                     >
-                        Add <Plus className="ml-2 h-4 w-4" />
+                        {isAdded ? (
+                            <>Added <Check className="ml-2 h-4 w-4" /></>
+                        ) : (
+                            <>Add <Plus className="ml-2 h-4 w-4" /></>
+                        )}
                     </Button>
                 </div>
             </div>
