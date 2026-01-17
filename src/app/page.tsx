@@ -1,24 +1,39 @@
-import Image from "next/image";
 import { Navbar } from "@/components/layout/Navbar"
-import { HeroBanner } from "@/components/home/HeroBanner"
+import HeroCarousel from "@/components/home/HeroCarousel"
+import CategoryNav from "@/components/home/CategoryNav"
+import SectionHeader from "@/components/home/SectionHeader"
+import { MenuItem } from "@/components/menu/MenuItem"
+import { MOCK_MENU } from "@/lib/mock-data"
 
 export default function Home() {
-  return (
-    <main className="min-h-screen bg-background">
-      <Navbar />
-      <HeroBanner />
+  const categories = MOCK_MENU.restaurant.categories;
 
-      <section className="container py-12 px-4">
-        <h2 className="text-2xl font-bold tracking-tight mb-6">Popular Categories</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {/* Quick Cards Placeholder */}
-          {['Fastest Delivery', 'Open Now', 'Top Rated', 'Free Shipping'].map((cat) => (
-            <div key={cat} className="p-4 rounded-xl border bg-card hover:bg-accent cursor-pointer transition-colors">
-              <p className="font-semibold">{cat}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+  return (
+    <main className="min-h-screen bg-[#fdfbf7]"> {/* Light cream background like FoodsInn */}
+      <Navbar />
+      <HeroCarousel />
+      <CategoryNav />
+
+      <div className="max-w-7xl mx-auto px-4 pb-20">
+        {categories.map((category) => {
+          // Filter items for this category
+          const categoryItems = MOCK_MENU.items.filter(item => item.category === category);
+
+          if (categoryItems.length === 0) return null;
+
+          return (
+            <section key={category} id={category} className="pt-8 scroll-mt-28">
+              <SectionHeader title={category} />
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {categoryItems.map((item) => (
+                  <MenuItem key={item.id} item={item} />
+                ))}
+              </div>
+            </section>
+          );
+        })}
+      </div>
     </main>
   );
 }
