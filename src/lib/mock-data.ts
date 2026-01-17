@@ -17,7 +17,7 @@ export const MOCK_MENU = {
             description: "Pure chicken stock with chicken chunks and bits of corn. (Serves 1-2)",
             price: 3.50, // 495 PKR
             currency: "AZN",
-            image: "https://images.unsplash.com/photo-1547592166-23acbe3a624b?auto=format&fit=crop&q=80&w=500", // Soup
+            image: "https://images.unsplash.com/photo-1604152135912-04a022e23696?auto=format&fit=crop&q=80&w=500", // Soup (Confirmed)
             category: "Appetizers",
             popular: true,
         },
@@ -27,7 +27,7 @@ export const MOCK_MENU = {
             description: "Made with chicken broth, chunks of chicken and variety vegetable with a tangy taste.",
             price: 4.00, // 595 PKR
             currency: "AZN",
-            image: "https://images.unsplash.com/photo-1603105037880-880cd4edfb0d?auto=format&fit=crop&q=80&w=500", // Hot & Sour
+            image: "https://images.unsplash.com/photo-1603105037880-880cd4edfb0d?auto=format&fit=crop&q=80&w=500", // Hot & Sour (Working)
             category: "Appetizers",
             popular: false,
         },
@@ -37,7 +37,7 @@ export const MOCK_MENU = {
             description: "5 Pcs of extra crispy boneless fish strips. Served with tartar sauce and fries.",
             price: 8.50, // 1345 PKR
             currency: "AZN",
-            image: "https://images.unsplash.com/photo-1599321955726-90296ec1d287?auto=format&fit=crop&q=80&w=500", // Finger Fish / Fried Food
+            image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&q=80&w=500", // Fried Chicken/Fish (Confirmed)
             category: "Appetizers",
             popular: true,
         },
@@ -103,7 +103,7 @@ export const MOCK_MENU = {
             description: "2 Pieces of Char-grilled chicken fillet topped with sauce of your choice. (Serves 1-2)",
             price: 11.50, // 1650 PKR
             currency: "AZN",
-            image: "https://images.unsplash.com/photo-1600891965151-b4101e05931b?auto=format&fit=crop&q=80&w=500", // Steak
+            image: "https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&q=80&w=500", // Grilled Chicken Steak (Changed)
             category: "Steaks",
             popular: true,
         },
@@ -135,7 +135,7 @@ export const MOCK_MENU = {
             description: "Barbecued Quarter chicken, marinated in a creamy based marination.",
             price: 4.80, // 745 PKR
             currency: "AZN",
-            image: "https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3c?auto=format&fit=crop&q=80&w=500", // Tikka
+            image: "https://images.unsplash.com/photo-1626776420079-fa1878dd1700?auto=format&fit=crop&q=80&w=500", // Creamy Tikka Skewers (Changed)
             category: "BBQ",
             popular: false,
         }
